@@ -1,0 +1,4 @@
+Coverage = {
+	Enabled = true,
+	Reporters = { "terminal", "html" },
+}
