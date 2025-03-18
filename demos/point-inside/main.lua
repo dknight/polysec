@@ -27,8 +27,8 @@ function love.update(dt)
 	local x = love.mouse.getX()
 	local y = love.mouse.getY()
 	if drag then
-		p.x = x - r
-		p.y = y - r
+		p[1] = x - r
+		p[2] = y - r
 	end
 end
 
@@ -50,11 +50,11 @@ function love.draw()
 	end
 	love.graphics.setLineWidth(3)
 	love.graphics.setColor(0.5137, 0.2373, 0.9255)
-	love.graphics.rectangle(rMode, rect.x, rect.y, rect.w, rect.h)
+	love.graphics.rectangle(rMode, rect[1], rect[2], rect[3], rect[4])
 	love.graphics.setColor(1, 0.7451, 0.0431)
 	love.graphics.polygon(pMode, polygon.toList(shape))
 	love.graphics.setColor(1, 0, 0.4314)
-	love.graphics.circle("fill", p.x, p.y, r)
+	love.graphics.circle("fill", p[1], p[2], r)
 	love.graphics.reset()
 end
 

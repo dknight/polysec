@@ -7,7 +7,7 @@ local polygon = polysec.polygon
 local point = polysec.point
 
 describe("Polygon", function()
-	local testPoly = polygon.new({ x = 0, y = 0 }, { x = 100, y = 100 }, { x = 200, y = 200 })
+	local testPoly = polygon.new({ 0, 0 }, { 100, 100 }, { 200, 200 })
 	it("should create an empty polygon", function()
 		local poly = polygon.new()
 		expect(#poly).toEqual(0)
@@ -15,9 +15,9 @@ describe("Polygon", function()
 
 	it("should create a new polygon", function()
 		expect(testPoly).toBe({
-			{ x = 0, y = 0 },
-			{ x = 100, y = 100 },
-			{ x = 200, y = 200 },
+			{ 0, 0 },
+			{ 100, 100 },
+			{ 200, 200 },
 		})
 	end)
 
@@ -25,10 +25,10 @@ describe("Polygon", function()
 		expect(#testPoly).toEqual(3)
 	end)
 
-	it("should add point to the polygon", function()
+	it("should add points to the polygon", function()
 		local poly = polygon.new()
-		polygon.add(poly, { x = 0, y = 0 })
-		polygon.add(poly, { x = 100, y = 100 }, { x = 200, y = 200 })
+		polygon.add(poly, { 0, 0 })
+		polygon.add(poly, { 100, 100 }, { 200, 200 })
 		expect(poly).toBe(testPoly)
 	end)
 
@@ -119,9 +119,9 @@ describe("Polygon", function()
 			local triangle = polygon.new(point.new(125, 125), point.new(62.5, 225), point.new(25, 125))
 			local poly = polygon.overlaps(square, triangle)
 			expect(poly).toBe({
-				{ x = 109.375, y = 150.0 },
-				{ x = 100.0, y = 165.0 },
-				{ x = 100, y = 150 },
+				{ 109.375, 150.0 },
+				{ 100.0, 165.0 },
+				{ 100, 150 },
 			})
 		end)
 	end)

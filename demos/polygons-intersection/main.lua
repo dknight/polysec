@@ -147,7 +147,7 @@ function love.mousemoved(_, _, dx, dy)
 		return
 	end
 	for _, p in ipairs(drag.points) do
-		p.x = p.x + dx
-		p.y = p.y + dy
+		p[1] = p[1] + dx
+		p[2] = p[2] + dy
 	end
 end

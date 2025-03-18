@@ -16,8 +16,8 @@ function love.update(dt)
 	local x = love.mouse.getX()
 	local y = love.mouse.getY()
 	if drag then
-		rect1.x = x - rect1.w / 2
-		rect1.y = y - rect1.h / 2
+		rect1[1] = x - rect1[3] / 2
+		rect1[2] = y - rect1[4] / 2
 	end
 end
 
@@ -32,13 +32,13 @@ function love.draw()
 	)
 	love.graphics.setLineWidth(3)
 	love.graphics.setColor(0.5137, 0.2373, 0.9255)
-	love.graphics.rectangle("line", rect2.x, rect2.y, rect2.w, rect2.h)
+	love.graphics.rectangle("line", rect2[1], rect2[2], rect2[3], rect2[4])
 	local r1mode = "line"
 	if rectangle.overlaps(rect1, rect2) then
 		r1mode = "fill"
 	end
 	love.graphics.setColor(1, 0, 0.4314)
-	love.graphics.rectangle(r1mode, rect1.x, rect1.y, rect1.w, rect1.h)
+	love.graphics.rectangle(r1mode, rect1[1], rect1[2], rect1[3], rect1[4])
 	love.graphics.reset()
 end
 

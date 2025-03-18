@@ -8,7 +8,7 @@ local point = polysec.point
 describe("Point", function()
 	it("should create a new point", function()
 		local p = point.new(0, 0)
-		expect(p).toBe({ x = 0, y = 0 })
+		expect(p).toBe({ 0, 0 })
 	end)
 
 	it("should have zero distance if points have same coordinates", function()

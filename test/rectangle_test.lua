@@ -9,12 +9,12 @@ local point = polysec.point
 describe("Rectangle", function()
 	it("should create a new rectangle by coordinates", function()
 		local r = rectangle.new(0, 0, 10, 10)
-		expect(r).toBe({ x = 0, y = 0, w = 10, h = 10 })
+		expect(r).toBe({ 0, 0, 10, 10 })
 	end)
 
 	it("should create a new rectangle by points", function()
 		local r = rectangle.new(point.new(0, 0), point.new(10, 10))
-		expect(r).toBe({ x = 0, y = 0, w = 10, h = 10 })
+		expect(r).toBe({ 0, 0, 10, 10 })
 	end)
 
 	it("should convert a new rectangle to list", function()

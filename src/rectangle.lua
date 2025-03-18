@@ -1,4 +1,4 @@
----@alias Rectangle{x: number, y: number, w: number, h: number}
+---@alias Rectangle [number, number, number, number]
 
 ---Creates a new rectangle.
 ---@param x number
@@ -9,9 +9,9 @@
 ---@overload fun(p: Point, q: Point): Rectangle
 local function new(x, y, w, h)
 	if type(x) == "table" and type(y) == "table" then
-		return { x = x.x, y = x.y, w = y.x, h = y.y }
+		return { x[1], x[2], y[1], y[2] }
 	end
-	return { x = x, y = y, w = w, h = h }
+	return { x, y, w, h }
 end
 
 ---Checks axis-aligned rectangles for the collision.
@@ -19,7 +19,7 @@ end
 ---@param b Rectangle
 ---@return boolean
 local function overlaps(a, b)
-	return a.x < b.x + b.w and a.x + a.w > b.x and a.y < b.y + b.h and a.y + a.h > b.y
+	return a[1] < b[1] + b[3] and a[1] + a[3] > b[1] and a[2] < b[2] + b[4] and a[2] + a[4] > b[2]
 end
 
 ---Checks is the point inside a rectangle.
@@ -27,14 +27,14 @@ end
 ---@param p Point
 ---@return boolean
 local function contains(rect, p)
-	return p.x >= rect.x and p.x <= rect.x + rect.w and p.y >= rect.y and p.y <= rect.y + rect.h
+	return p[1] >= rect[1] and p[1] <= rect[1] + rect[3] and p[2] >= rect[2] and p[2] <= rect[2] + rect[4]
 end
 
 ---Converts the rectangle to the array of numbers.
 ---@param rect Rectangle
 ---@return number[]
 local function toList(rect)
-	return { rect.x, rect.y, rect.w, rect.h }
+	return { rect[1], rect[2], rect[3], rect[4] }
 end
 
 return {

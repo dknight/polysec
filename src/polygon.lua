@@ -29,8 +29,8 @@ end
 local function toList(poly)
 	local t = {}
 	for _, p in ipairs(poly) do
-		t[#t + 1] = p.x
-		t[#t + 1] = p.y
+		t[#t + 1] = p[1]
+		t[#t + 1] = p[2]
 	end
 	return t
 end
@@ -47,12 +47,12 @@ local function contains(a, p)
 		local v1 = a[i]
 		local v2 = a[i % #a + 1]
 
-		if v1.y <= p.y then
-			if v2.y > p.y and (v2.x - v1.x) * (p.y - v1.y) > (p.x - v1.x) * (v2.y - v1.y) then
+		if v1[2] <= p[2] then
+			if v2[2] > p[2] and (v2[1] - v1[1]) * (p[2] - v1[2]) > (p[1] - v1[1]) * (v2[2] - v1[2]) then
 				windingNumber = windingNumber + 1
 			end
 		else
-			if v2.y <= p.y and (v2.x - v1.x) * (p.y - v1.y) < (p.x - v1.x) * (v2.y - v1.y) then
+			if v2[2] <= p[2] and (v2[1] - v1[1]) * (p[2] - v1[2]) < (p[1] - v1[1]) * (v2[2] - v1[2]) then
 				windingNumber = windingNumber - 1
 			end
 		end
@@ -69,8 +69,8 @@ end
 ---@param q2 Point
 ---@return Point | nil
 local function intersects(p1, p2, q1, q2)
-	local a1, b1, c1 = p2.y - p1.y, p1.x - p2.x, (p2.y - p1.y) * p1.x + (p1.x - p2.x) * p1.y
-	local a2, b2, c2 = q2.y - q1.y, q1.x - q2.x, (q2.y - q1.y) * q1.x + (q1.x - q2.x) * q1.y
+	local a1, b1, c1 = p2[2] - p1[2], p1[1] - p2[1], (p2[2] - p1[2]) * p1[1] + (p1[1] - p2[1]) * p1[2]
+	local a2, b2, c2 = q2[2] - q1[2], q1[1] - q2[1], (q2[2] - q1[2]) * q1[1] + (q1[1] - q2[1]) * q1[2]
 
 	local det = a1 * b2 - a2 * b1
 	if math.abs(det) < constant.Epsilon then
@@ -82,14 +82,14 @@ local function intersects(p1, p2, q1, q2)
 
 	-- Ensure intersection is within both line segments
 	if
-		math.min(p1.x, p2.x) <= x
-		and x <= math.max(p1.x, p2.x)
-		and math.min(p1.y, p2.y) <= y
-		and y <= math.max(p1.y, p2.y)
-		and math.min(q1.x, q2.x) <= x
-		and x <= math.max(q1.x, q2.x)
-		and math.min(q1.y, q2.y) <= y
-		and y <= math.max(q1.y, q2.y)
+		math.min(p1[1], p2[1]) <= x
+		and x <= math.max(p1[1], p2[1])
+		and math.min(p1[2], p2[2]) <= y
+		and y <= math.max(p1[2], p2[2])
+		and math.min(q1[1], q2[1]) <= x
+		and x <= math.max(q1[1], q2[1])
+		and math.min(q1[2], q2[2]) <= y
+		and y <= math.max(q1[2], q2[2])
 	then
 		return point.new(x, y)
 	end
