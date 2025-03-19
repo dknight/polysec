@@ -20,7 +20,6 @@
 
 ![Polygon intersection animated demonstration in GIF format](https://www.whoop.ee/assets/img/polysec-demo.gif)
 
-[Download the source code](https://github.com/dknight/polysec) from GitHub.
 
 ## Weiler-Athethon algorithm shortly
 
