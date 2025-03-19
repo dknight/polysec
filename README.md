@@ -90,8 +90,8 @@ Point 3: {x = 100, y = 150}
 --]]
 ```
 
-!!! tip
-If you're working exclusively with rectangles, use the `rectangle` module for a simpler and more efficient algorithm. For non-rectangular polygons, opt for the `polygon` module.
+> [!TIP]
+> If you're working exclusively with rectangles, use the `rectangle` module for a simpler and more efficient algorithm. For non-rectangular polygons, opt for the `polygon` module.
 
 ## Running demos
 
