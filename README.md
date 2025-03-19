@@ -1,4 +1,4 @@
-# Polysec library
+# Polysec
 
 <p align="center">
 <img src="https://www.whoop.ee/assets/img/polysec.svg" alt="Polysec logo">
