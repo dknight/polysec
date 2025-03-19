@@ -1,7 +1,7 @@
 # Polysec library
 
 <p align="center">
-<img src="(https://www.whoop.ee/assets/img/polysec.svg" alt="Polysec logo">
+<img src="https://www.whoop.ee/assets/img/polysec.svg" alt="Polysec logo">
 </p>
 
 *Polysec* is a framework-agnostic Lua library for detecting intersections and collisions between polygons and rectangles. It provides an efficient algorithm for polygonal intersection detection, making it suitable for the collision handling. While Polysec is independent of any specific framework, it is framework-agnostic.
