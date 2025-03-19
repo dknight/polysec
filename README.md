@@ -4,18 +4,18 @@
 ![Polysec Logo](https://www.whoop.ee/assets/img/polysec.svg)
 </p>
 
-[*Polysec*](https://github.com/dknight/polysec) is a framework-agnostic Lua library for detecting intersections and collisions between polygons and rectangles. It provides an efficient algorithm for polygonal intersection detection, making it suitable for the collision handling. While Polysec is independent of any specific framework, it is framework-agnostic. 
+*Polysec* is a framework-agnostic Lua library for detecting intersections and collisions between polygons and rectangles. It provides an efficient algorithm for polygonal intersection detection, making it suitable for the collision handling. While Polysec is independent of any specific framework, it is framework-agnostic.
 
 ## Features
 
 - Detect point belongs to polygon or rectangle.
 - Detect collision of rectangles.
 - Detect collision of polygons.
-- Measure distance between who points. 
+- Measure distance between who points.
 
 ![Polygon intersection animated demonstration in GIF format](https://www.whoop.ee/assets/img/polysec-demo.gif)
 
-For nore information about algorithm, check out [external Whoopee website](https://www.whpop.ee/post/polygons-and-rectangles-intersection.html).
+[Download the source code](https://github.com/dknight/polysec) from GitHub.
 
 ## Weiler-Athethon algorithm shortly
 
@@ -25,7 +25,7 @@ Under the hood *Polysec* uses the [Weiler-Athethon algorithm](https://en.wikiped
 
 Before applying the algorithm to a polygon, the following conditions must be met:
 
-- Polygons must be oriented in a clockwise direction. 
+- Polygons must be oriented in a clockwise direction.
 - Polygons must not be self-intersected (i.e., they should not be re-entrant).
 
 ### Algorithm Steps
@@ -87,8 +87,7 @@ Point 3: {x = 100, y = 150}
 ```
 
 !!! tip
-  If you're working exclusively with rectangles, use the `rectangle` module for a simpler and more efficient algorithm. For non-rectangular polygons, opt for the `polygon` module.
-
+If you're working exclusively with rectangles, use the `rectangle` module for a simpler and more efficient algorithm. For non-rectangular polygons, opt for the `polygon` module.
 
 ## Running demos
 
@@ -150,11 +149,11 @@ make lint test
 - `contains(rect: Rectangle, point: Point): boolean`<br>
   Checks is the point inside a rectangle.
 - `overlaps(rect1: Rectangle, rect2: Rectangle): boolean`<br>
-  Checks two axis-aligned rectangles for the collision. 
+  Checks two axis-aligned rectangles for the collision.
 - `toList(rect: Rectangle): number`<br>
   Converts the rectangle to the array of numbers.
 
-#### `polygon` 
+#### `polygon`
 
 - `new(...points: Point[]): Polygon`<br>
   Creates a new polygon instance.
@@ -182,4 +181,4 @@ or submit an [issue](https://github.com/dknight/polysec/issues).
 
 ## License
 
-MIT 2024
+MIT 2025
