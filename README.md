@@ -122,7 +122,7 @@ Lint (code quality)
 luacheck src test
 ```
 
-Run everything with `make` softwrae
+Run everything with `make` software
 
 ```shell
 make lint test
