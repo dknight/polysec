@@ -133,7 +133,7 @@ make lint test
 ### Types
 
 - `Point [number, number]`
-- `Rectangle [number, number, number]`
+- `Rectangle [number, number, number, number]`
 - `Polygon Point[]`
 
 ### Modules
