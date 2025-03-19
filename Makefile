@@ -1,8 +1,7 @@
 default: test lint
 
-
 test:
-	laura .
+	laura test/
 
 lint:
 	luacheck src/ test/
