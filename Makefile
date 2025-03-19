@@ -4,7 +4,7 @@ test:
 	laura --nocoverage test/
 
 coverage:
-    laura test/
+	laura test
 
 lint:
 	luacheck src/ test/
