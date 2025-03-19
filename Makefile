@@ -1,7 +1,7 @@
 default: test lint
 
 test:
-	laura test/
+	laura --nocoverage test/
 
 lint:
 	luacheck src/ test/
