@@ -26,4 +26,4 @@ jobs:
 
       # Here you change test directory, if is different.
       - name: test
-        run: make lint test
+        run: make
