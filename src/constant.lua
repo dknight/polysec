@@ -1,4 +1,4 @@
 ---@enum Constants
 return {
-	Epsilon = 1e-10,
+	Epsilon = 1e-9,
 }

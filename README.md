@@ -13,10 +13,11 @@
 
 ## Features
 
-- Detect point belongs to polygon or rectangle.
+- Detect point belongs to polygon, circle or rectangle.
 - Detect collision of rectangles.
 - Detect collision of polygons.
 - Measure distance between two points.
+- Checks that two point are equal (have same coordinates).
 
 ![Polygon intersection animated demonstration in GIF format](https://www.whoop.ee/assets/img/polysec-demo.gif)
 

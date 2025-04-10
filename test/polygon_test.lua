@@ -114,15 +114,30 @@ describe("Polygon", function()
 		end)
 
 		it("should overlap some figures", function()
-			local square =
-				polygon.new(point.new(100, 150), point.new(200, 150), point.new(200, 250), point.new(100, 250))
-			local triangle = polygon.new(point.new(125, 125), point.new(62.5, 225), point.new(25, 125))
+			local square = polygon.new(
+				point.new(100, 150),
+				point.new(200, 150),
+				point.new(200, 250),
+				point.new(100, 250)
+			)
+			local triangle = polygon.new(
+				point.new(125, 125),
+				point.new(62.5, 225),
+				point.new(25, 125)
+			)
 			local poly = polygon.overlaps(square, triangle)
 			expect(poly).toBe({
 				{ 109.375, 150.0 },
 				{ 100.0, 165.0 },
 				{ 100, 150 },
 			})
+		end)
+	end)
+
+	describe("isPolygon", function()
+		it("should be a polygon", function()
+			local poly = polygon.new({ 0, 0 }, { 100, 100 }, { 200, 200 })
+			expect(polygon.isPolygon(poly)).toEqual(true)
 		end)
 	end)
 end)

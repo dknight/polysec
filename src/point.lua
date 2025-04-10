@@ -17,7 +17,15 @@ local function distanceTo(p, q)
 	return math.sqrt(dx * dx + dy * dy)
 end
 
+---Checks that two points have same coordinates.
+---@param p Point
+---@param q Point
+local function areEqual(p, q)
+	return p[1] == q[1] and p[2] == q[2]
+end
+
 return {
+	areEqual = areEqual,
 	new = new,
 	distanceTo = distanceTo,
 }

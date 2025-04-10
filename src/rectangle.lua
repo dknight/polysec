@@ -1,5 +1,7 @@
 ---@alias Rectangle [number, number, number, number]
 
+local mt = require("shape").createMetaTableForKind("rectangle")
+
 ---Creates a new rectangle.
 ---@param x number
 ---@param y number
@@ -9,9 +11,9 @@
 ---@overload fun(p: Point, q: Point): Rectangle
 local function new(x, y, w, h)
 	if type(x) == "table" and type(y) == "table" then
-		return { x[1], x[2], y[1], y[2] }
+		return setmetatable({ x[1], x[2], y[1], y[2] }, mt)
 	end
-	return { x, y, w, h }
+	return setmetatable({ x, y, w, h }, mt)
 end
 
 ---Checks axis-aligned rectangles for the collision.
@@ -19,7 +21,10 @@ end
 ---@param b Rectangle
 ---@return boolean
 local function overlaps(a, b)
-	return a[1] < b[1] + b[3] and a[1] + a[3] > b[1] and a[2] < b[2] + b[4] and a[2] + a[4] > b[2]
+	return a[1] < b[1] + b[3]
+		and a[1] + a[3] > b[1]
+		and a[2] < b[2] + b[4]
+		and a[2] + a[4] > b[2]
 end
 
 ---Checks is the point inside a rectangle.
@@ -27,7 +32,10 @@ end
 ---@param p Point
 ---@return boolean
 local function contains(rect, p)
-	return p[1] >= rect[1] and p[1] <= rect[1] + rect[3] and p[2] >= rect[2] and p[2] <= rect[2] + rect[4]
+	return p[1] >= rect[1]
+		and p[1] <= rect[1] + rect[3]
+		and p[2] >= rect[2]
+		and p[2] <= rect[2] + rect[4]
 end
 
 ---Converts the rectangle to the array of numbers.
@@ -37,9 +45,17 @@ local function toList(rect)
 	return { rect[1], rect[2], rect[3], rect[4] }
 end
 
+---Checks that given shape is a orthogonal receives.
+---@param shape Shape
+---@return boolean
+local function isRectangle(shape)
+	return shape.kind == "rectangle"
+end
+
 return {
+	contains = contains,
+	isRectangle = isRectangle,
 	new = new,
 	overlaps = overlaps,
-	contains = contains,
 	toList = toList,
 }

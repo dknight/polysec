@@ -1,6 +1,8 @@
 local constant = require("src.constant")
 local point = require("src.point")
 
+local mt = require("shape").createMetaTableForKind("polygon")
+
 ---@alias Polygon Point[]
 
 ---Creates a new polygon.
@@ -11,7 +13,7 @@ local function new(...)
 	for _, p in ipairs(table.pack(...)) do
 		t[#t + 1] = p
 	end
-	return t
+	return setmetatable(t, mt)
 end
 
 ---Adds point(s) to the polygon.
@@ -48,11 +50,19 @@ local function contains(a, p)
 		local v2 = a[i % #a + 1]
 
 		if v1[2] <= p[2] then
-			if v2[2] > p[2] and (v2[1] - v1[1]) * (p[2] - v1[2]) > (p[1] - v1[1]) * (v2[2] - v1[2]) then
+			if
+				v2[2] > p[2]
+				and (v2[1] - v1[1]) * (p[2] - v1[2])
+					> (p[1] - v1[1]) * (v2[2] - v1[2])
+			then
 				windingNumber = windingNumber + 1
 			end
 		else
-			if v2[2] <= p[2] and (v2[1] - v1[1]) * (p[2] - v1[2]) < (p[1] - v1[1]) * (v2[2] - v1[2]) then
+			if
+				v2[2] <= p[2]
+				and (v2[1] - v1[1]) * (p[2] - v1[2])
+					< (p[1] - v1[1]) * (v2[2] - v1[2])
+			then
 				windingNumber = windingNumber - 1
 			end
 		end
@@ -69,8 +79,14 @@ end
 ---@param q2 Point
 ---@return Point | nil
 local function intersects(p1, p2, q1, q2)
-	local a1, b1, c1 = p2[2] - p1[2], p1[1] - p2[1], (p2[2] - p1[2]) * p1[1] + (p1[1] - p2[1]) * p1[2]
-	local a2, b2, c2 = q2[2] - q1[2], q1[1] - q2[1], (q2[2] - q1[2]) * q1[1] + (q1[1] - q2[1]) * q1[2]
+	local a1, b1, c1 =
+		p2[2] - p1[2],
+		p1[1] - p2[1],
+		(p2[2] - p1[2]) * p1[1] + (p1[1] - p2[1]) * p1[2]
+	local a2, b2, c2 =
+		q2[2] - q1[2],
+		q1[1] - q2[1],
+		(q2[2] - q1[2]) * q1[1] + (q1[1] - q2[1]) * q1[2]
 
 	local det = a1 * b2 - a2 * b1
 	if math.abs(det) < constant.Epsilon then
@@ -137,11 +153,19 @@ local function overlaps(a, b)
 	end
 end
 
+---Checks is the point inside a rectangle.
+---@param shape Shape
+---@return boolean
+local function isPolygon(shape)
+	return shape.kind == "polygon"
+end
+
 return {
 	add = add,
-	new = new,
 	contains = contains,
 	intersects = intersects,
+	isPolygon = isPolygon,
+	new = new,
 	overlaps = overlaps,
 	toList = toList,
 }
