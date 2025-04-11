@@ -1,6 +1,8 @@
 ---@alias Circle [number, number, number]
 
-local mt = require("shape").createMetaTableForKind("circle")
+local shape = require("shape")
+local Circle = shape.Kind.Circle
+local mt = shape.createMetaTableForKind(Circle)
 
 ---Creates a new point.
 ---@param x number
@@ -35,10 +37,10 @@ local function contains(circle, p)
 end
 
 ---Checks that given shape is a circle.
----@param shape Shape
+---@param sh Shape
 ---@return boolean
-local isCircle = function(shape)
-	return shape.kind == "circle"
+local isCircle = function(sh)
+	return sh.kind == Circle
 end
 
 return {

@@ -1,5 +1,11 @@
+---@enum (number) Kind
+local Kind = {
+	Rectangle = 0,
+	Polygon = 1,
+	Circle = 2,
+}
+---
 ---@alias Shape Rectangle | Polygon | Circle | {kind: Kind}
----@alias Kind "rectangle" | "polygon" | "circle"
 
 ---Create a metatable with a "kind" field to distinguish shapes easily
 ---created with PolySec
@@ -15,4 +21,5 @@ end
 
 return {
 	createMetaTableForKind = createMetaTableForKind,
+	Kind = Kind,
 }

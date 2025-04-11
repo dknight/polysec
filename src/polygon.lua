@@ -1,7 +1,8 @@
 local constant = require("src.constant")
 local point = require("src.point")
-
-local mt = require("shape").createMetaTableForKind("polygon")
+local shape = require("shape")
+local Polygon = shape.Kind.Polygon
+local mt = shape.createMetaTableForKind(Polygon)
 
 ---@alias Polygon Point[]
 
@@ -154,10 +155,10 @@ local function overlaps(a, b)
 end
 
 ---Checks is the point inside a rectangle.
----@param shape Shape
+---@param sh Shape
 ---@return boolean
-local function isPolygon(shape)
-	return shape.kind == "polygon"
+local function isPolygon(sh)
+	return sh.kind == Polygon
 end
 
 return {

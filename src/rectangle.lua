@@ -1,6 +1,8 @@
 ---@alias Rectangle [number, number, number, number]
 
-local mt = require("shape").createMetaTableForKind("rectangle")
+local shape = require("shape")
+local Rectangle = shape.Kind.Rectangle
+local mt = shape.createMetaTableForKind(Rectangle)
 
 ---Creates a new rectangle.
 ---@param x number
@@ -46,10 +48,10 @@ local function toList(rect)
 end
 
 ---Checks that given shape is a orthogonal receives.
----@param shape Shape
+---@param sh Shape
 ---@return boolean
-local function isRectangle(shape)
-	return shape.kind == "rectangle"
+local function isRectangle(sh)
+	return sh.kind == Rectangle
 end
 
 return {
