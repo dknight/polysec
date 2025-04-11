@@ -1,6 +1,6 @@
 ---@alias Circle [number, number, number]
 
-local shape = require("shape")
+local shape = require("src.shape")
 local Circle = shape.Kind.Circle
 local mt = shape.createMetaTableForKind(Circle)
 
@@ -25,27 +25,7 @@ local function toList(circle)
 	return circle
 end
 
----Checks is the point inside a circle.
----@param circle Circle
----@param p Point
----@return boolean
-local function contains(circle, p)
-	local x = p[1] - circle[1]
-	local y = p[2] - circle[2]
-	local r = circle[3] * circle[3]
-	return (x * x + y * y) <= r * r
-end
-
----Checks that given shape is a circle.
----@param sh Shape
----@return boolean
-local isCircle = function(sh)
-	return sh.kind == Circle
-end
-
 return {
-	contains = contains,
-	isCircle = isCircle,
 	new = new,
 	toList = toList,
 }

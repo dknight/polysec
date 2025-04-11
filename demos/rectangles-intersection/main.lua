@@ -34,7 +34,7 @@ function love.draw()
 	love.graphics.setColor(0.5137, 0.2373, 0.9255)
 	love.graphics.rectangle("line", rect2[1], rect2[2], rect2[3], rect2[4])
 	local r1mode = "line"
-	if rectangle.overlaps(rect1, rect2) then
+	if polysec.overlap(rect1, rect2) then
 		r1mode = "fill"
 	end
 	love.graphics.setColor(1, 0, 0.4314)

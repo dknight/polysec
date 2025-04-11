@@ -1,10 +1,10 @@
-local constant = require("constant")
+local Epsilon = require("src.shape").Epsilon
 
 ---@param a number
 ---@param b number
 ---@return boolean
 local closeTo = function(a, b)
-	return a == b or math.abs(a - b) < constant.Epsilon
+	return a == b or math.abs(a - b) < Epsilon
 end
 
 return {
