@@ -20,6 +20,6 @@ describe("Rectangle", function()
 
 	it("should convert a rectangle to list", function()
 		local r = rectangle.new(point.new(0, 0), point.new(10, 10))
-		expect(rectangle.toList(r)).toBe({ 0, 0, 10, 10 })
+		expect({ rectangle.toList(r) }).toBe({ 0, 0, 10, 10 })
 	end)
 end)

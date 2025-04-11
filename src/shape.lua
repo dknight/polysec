@@ -57,8 +57,7 @@ local function contain(s, p)
 	elseif isCircle(s) then
 		local x = p[1] - s[1]
 		local y = p[2] - s[2]
-		local r = s[3] * s[3]
-		return (x * x + y * y) <= r * r
+		return (x * x + y * y) <= s[3] * s[3]
 	elseif isPolygon(s) then
 		local windingNumber = 0
 		for i = 1, #s do

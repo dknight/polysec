@@ -20,9 +20,9 @@ end
 
 ---Converts the rectangle to the array of numbers.
 ---@param rect Rectangle
----@return number[]
+---@return number, number, number, number
 local function toList(rect)
-	return { rect[1], rect[2], rect[3], rect[4] }
+	return rect[1], rect[2], rect[3], rect[4]
 end
 
 return {

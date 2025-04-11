@@ -20,9 +20,9 @@ end
 ---Converts the circle to the array of numbers. This method is done for
 ---the consistency only.
 ---@param circle Circle
----@return number[]
+---@return number, number, number
 local function toList(circle)
-	return circle
+	return circle[1], circle[2], circle[3]
 end
 
 return {

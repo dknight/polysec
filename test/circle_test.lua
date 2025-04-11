@@ -20,6 +20,6 @@ describe("Circle", function()
 
 	it("should convert a circle to list", function()
 		local c = circle.new(point.new(10, 20), 5)
-		expect(circle.toList(c)).toBe({ 10, 20, 5 })
+		expect({ circle.toList(c) }).toBe({ 10, 20, 5 })
 	end)
 end)

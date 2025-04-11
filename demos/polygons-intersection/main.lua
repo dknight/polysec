@@ -98,7 +98,7 @@ function love.update(dt)
 	for i in ipairs(shapes) do
 		for j in ipairs(shapes) do
 			local _, inter =
-				polygon.overlaps(shapes[i].points, shapes[j].points)
+				polysec.overlap(shapes[i].points, shapes[j].points)
 			if i ~= j and inter then
 				shapes[i].intersecting = true
 				break
@@ -132,7 +132,7 @@ end
 
 function love.mousepressed(x, y)
 	for _, shape in ipairs(shapes) do
-		if polygon.contains(shape.points, point.new(x, y)) then
+		if polysec.contain(shape.points, point.new(x, y)) then
 			drag = shape
 		end
 	end
