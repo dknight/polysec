@@ -9,7 +9,7 @@ local font = love.graphics.newFont(20)
 
 function love.load()
 	width = love.graphics.getDimensions()
-	testCircle = circle.new(200, 200, 40)
+	testCircle = circle.new(200, 200, 30)
 	rect = rectangle.new(400, 100, 150, 150)
 	poly = polygon.new(
 		point.new(630, 400),

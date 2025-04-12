@@ -200,12 +200,12 @@ describe("Shape", function()
 		describe("overlap", function()
 			it("should overlap square and hexagon", function()
 				local ok = polysec.overlap(shapes[1].points, shapes[4].points)
-				expect(ok).toBeTruthy()
+				expect(ok).toEqual(true)
 			end)
 
 			it("should no overlap abstract and square-hole", function()
 				local ok = polysec.overlap(shapes[2].points, shapes[3].points)
-				expect(ok).toBeFalsy()
+				expect(ok).toEqual(false)
 			end)
 
 			it("should overlap some figures", function()
@@ -226,6 +226,15 @@ describe("Shape", function()
 					{ 100.0, 165.0 },
 					{ 100, 150 },
 				})
+			end)
+
+			it("should overlap polygon and circle", function()
+				local c = circle.new(300, 300, 100)
+				expect(polysec.overlap(c, shapes[4].points)).toEqual(true)
+			end)
+			it("should overlap circle and polygon", function()
+				local c = circle.new(280, 280, 10)
+				expect(polysec.overlap(shapes[4].points, c)).toEqual(true)
 			end)
 		end)
 

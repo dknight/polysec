@@ -120,7 +120,7 @@ end
 ---@param a Rectangle
 ---@param b Rectangle
 ---@return boolean
-local function overlapRectRect(a, b)
+local function rectangleRectangle(a, b)
 	return a[1] < b[1] + b[3]
 		and a[1] + a[3] > b[1]
 		and a[2] < b[2] + b[4]
@@ -133,7 +133,7 @@ end
 ---@param a Polygon
 ---@param b Polygon
 ---@return boolean, Polygon | nil
-local function overlapPolyPoly(a, b)
+local function polygonPolygon(a, b)
 	local t = {}
 
 	for i = 1, #a do
@@ -171,25 +171,24 @@ end
 ---@param a Rectangle
 ---@param b Polygon
 ---@return boolean
-local function overlapRectPoly(a, b)
+local function rectanglePoly(a, b)
 	local poly = polygon.new(
 		point.new(a[1], a[2]),
 		point.new(a[1], a[2] + a[4]),
 		point.new(a[1] + a[3], a[2] + a[4]),
 		point.new(a[1] + a[3], a[2])
 	)
-	return overlapPolyPoly(poly, b)
+	return polygonPolygon(poly, b)
 end
 
 ---Checks overlapping of rectangle and circle.
 ---@param a Rectangle
 ---@param b Circle
 ---@return boolean
-local function overlapRectCircle(a, b)
-	local xMin, yMin = a[1], a[2]
+local function rectangleCircle(a, b)
 	local xMax, yMax = a[1] + a[3], a[2] + a[4]
-	local xClosest = math.max(xMin, math.min(b[1], xMax))
-	local yClosest = math.max(yMin, math.min(b[2], yMax))
+	local xClosest = math.max(a[1], math.min(b[1], xMax))
+	local yClosest = math.max(a[2], math.min(b[2], yMax))
 	local dx, dy = xClosest - b[1], yClosest - b[2]
 	return dx * dx + dy * dy <= b[3] * b[3]
 end
@@ -198,18 +197,45 @@ end
 ---@param a Circle
 ---@param b Circle
 ---@return boolean
-local function overlapCircleCircle(a, b)
+local function circleCircle(a, b)
 	local dx, dy = b[1] - a[1], b[2] - a[2]
 	return math.sqrt(dx * dx + dy * dy) <= a[3] + b[3]
+end
+
+-- TODO annot
+local function lineCircle(x1, y1, x2, y2, r)
+	local ac = { r[1] - x1, r[2] - y1 }
+	local ab = { x2 - x1, y2 - y1 }
+	local ab2 = ab[1] * ab[1] + ab[2] * ab[2]
+	local acab = ac[1] * ab[1] + ac[2] * ab[2]
+	local t = acab / ab2
+	t = t < 0 and 0 or t
+	t = t > 1 and 1 or t
+	local h = { (ab[1] * t + x1) - r[1], (ab[2] * t + y1) - r[2] }
+	return h[1] * h[1] + h[2] * h[2] <= r[3] * r[3]
 end
 
 ---Checks overlapping of polygon and circle.
 ---@param a Polygon
 ---@param b Circle
 ---@return boolean
-local function overlapPolyCircle(a, b)
-	---TODO implement
-	return false
+local function polygonCircle(a, b)
+	-- Check vertices
+	for _, p in ipairs(a) do
+		if contain(b, p) then
+			return true
+		end
+	end
+	-- Check lines
+	for i = 2, #a, 1 do
+		if lineCircle(a[i - 1][1], a[i - 1][2], a[i][1], a[i][2], b) then
+			return true
+		end
+	end
+	if lineCircle(a[1][1], a[1][2], a[#a][1], a[#a][2], b) then
+		return true
+	end
+	return contain(a, { b[1], b[2] })
 end
 
 ---Checks overlap of 2 shapes.
@@ -218,23 +244,23 @@ end
 ---@return boolean, Shape?
 local function overlap(p, q)
 	if p.kind == Kind.Rectangle and q.kind == Kind.Rectangle then
-		return overlapRectRect(p, q)
+		return rectangleRectangle(p, q)
 	elseif p.kind == Kind.Polygon and q.kind == Kind.Polygon then
-		return overlapPolyPoly(p, q)
+		return polygonPolygon(p, q)
 	elseif p.kind == Kind.Rectangle and q.kind == Kind.Polygon then
-		return overlapRectPoly(p, q)
+		return rectanglePoly(p, q)
 	elseif p.kind == Kind.Polygon and q.kind == Kind.Rectangle then
-		return overlapRectPoly(q, p)
+		return rectanglePoly(q, p)
 	elseif p.kind == Kind.Circle and q.kind == Kind.Circle then
-		return overlapCircleCircle(q, p)
+		return circleCircle(q, p)
 	elseif p.kind == Kind.Rectangle and q.kind == Kind.Circle then
-		return overlapRectCircle(p, q)
+		return rectangleCircle(p, q)
 	elseif p.kind == Kind.Circle and q.kind == Kind.Rectangle then
-		return overlapRectCircle(q, p)
+		return rectangleCircle(q, p)
 	elseif p.kind == Kind.Polygon and q.kind == Kind.Circle then
-		return overlapPolyCircle(p, q)
+		return polygonCircle(p, q)
 	elseif p.kind == Kind.Circle and q.kind == Kind.Polygon then
-		return overlapPolyCircle(q, p)
+		return polygonCircle(q, p)
 	else
 		return false
 	end
