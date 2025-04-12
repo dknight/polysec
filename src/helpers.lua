@@ -1,5 +1,5 @@
----@type number A "very small" number
-local Epsilon = 1e-9
+local Epsilon = require("src.Constant").Epsilon
+local Kind = require("src.Kind")
 
 ---@param a number
 ---@param b number
@@ -20,8 +20,31 @@ local function createMetaTableForKind(kind)
 	}
 end
 
+---Checks is the point inside a rectangle.
+---@param s Shape
+---@return boolean
+local function isPolygon(s)
+	return s.kind == Kind.Polygon
+end
+
+---Checks that given shape is a circle.
+---@param s Shape
+---@return boolean
+local isCircle = function(s)
+	return s.kind == Kind.Circle
+end
+
+---Checks that given shape is a orthogonal receives.
+---@param s Shape
+---@return boolean
+local function isRectangle(s)
+	return s.kind == Kind.Rectangle
+end
 return {
 	Epsilon = Epsilon,
 	closeTo = closeTo,
 	createMetaTableForKind = createMetaTableForKind,
+	isCircle = isCircle,
+	isPolygon = isPolygon,
+	isRectangle = isRectangle,
 }

@@ -1,15 +1,23 @@
-local shape = require("src.shape")
+local helpers = require("src.helpers")
+local rectangle = require("src.rectangle")
+local orthogonal = require("src.orthogonal")
 
 return {
 	circle = require("src.circle"),
 	point = require("src.point"),
 	polygon = require("src.polygon"),
-	rectangle = require("src.rectangle"),
+	rectangle = rectangle,
 
-	overlap = shape.overlap,
-	contain = shape.contain,
+	overlap = require("src.overlap"),
+	contain = require("src.contain"),
 
-	isCircle = shape.isCircle,
-	isPolygon = shape.isPolygon,
-	isRectangle = shape.isRectangle,
+	isCircle = helpers.isCircle,
+	isPolygon = helpers.isPolygon,
+	isRectangle = helpers.isRectangle,
+
+	orthogonal = {
+		rectangle = rectangle,
+		contain = orthogonal.contain,
+		overlap = orthogonal.overlap,
+	},
 }
