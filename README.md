@@ -91,8 +91,19 @@ Point 3: {x = 100, y = 150}
 --]]
 ```
 
+## Orthogonal
+
 > [!TIP]
-> If you're working exclusively with rectangles, use the `rectangle` module for a simpler and more efficient algorithm. For non-rectangular polygons, opt for the `polygon` module.
+> If you're working exclusively with axis-aligned rectangles, use the `orthogonal` module for a simpler and more efficient algorithm. For non-rectangular polygons, opt for the `polygon` module.
+
+```lua
+local polysec = require("init")
+local orthogonal = polysec.orthogonal
+
+local rect = orthogonal.rectangle.new(0, 0, 100, 100)
+orthogonal.contain(rect, {50, 50}) --> true
+orthogonal.overlap(rect, orthogonal.rectangle.new(50, 50, 75, 75)) --> true
+```
 
 ## Running demos
 
