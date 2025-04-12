@@ -49,6 +49,18 @@ describe("Shape", function()
 				local rect = rectangle.new(0, 0, 100, 100)
 				expect(polysec.overlap(rect, poly)).toEqual(true)
 			end)
+
+			it("should not collide rectangle and circle", function()
+				local circl = circle.new(50, 50, 100)
+				local rect = rectangle.new(0, 0, 100, 100)
+				expect(polysec.overlap(circl, rect)).toEqual(true)
+			end)
+
+			it("should not collide circle and rectangle", function()
+				local circl = circle.new(50, 50, 100)
+				local rect = rectangle.new(0, 0, 100, 100)
+				expect(polysec.overlap(rect, circl)).toEqual(true)
+			end)
 		end)
 
 		describe("isRectangle", function()

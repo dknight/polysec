@@ -8,24 +8,24 @@ local Epsilon = helpers.Epsilon
 ---@alias Shape Rectangle | Polygon | Circle | {kind: Kind}
 
 ---Checks is the point inside a rectangle.
----@param sh Shape
+---@param s Shape
 ---@return boolean
-local function isPolygon(sh)
-	return sh.kind == Kind.Polygon
+local function isPolygon(s)
+	return s.kind == Kind.Polygon
 end
 
 ---Checks that given shape is a circle.
----@param sh Shape
+---@param s Shape
 ---@return boolean
-local isCircle = function(sh)
-	return sh.kind == Kind.Circle
+local isCircle = function(s)
+	return s.kind == Kind.Circle
 end
 
 ---Checks that given shape is a orthogonal receives.
----@param sh Shape
+---@param s Shape
 ---@return boolean
-local function isRectangle(sh)
-	return sh.kind == Kind.Rectangle
+local function isRectangle(s)
+	return s.kind == Kind.Rectangle
 end
 
 ---Checks is the point inside a shape.
@@ -181,6 +181,19 @@ local function overlapsRectPoly(a, b)
 	return overlapsPolyPoly(poly, b)
 end
 
+---Checks overlapping of rectangle and polygon.
+---@param a Rectangle
+---@param b Circle
+---@return boolean
+local function overlapsRectCircle(a, b)
+	local xMin, yMin = a[1], a[2]
+	local xMax, yMax = a[1] + a[3], a[2] + a[4]
+	local xClosest = math.max(xMin, math.min(b[1], xMax))
+	local yClosest = math.max(yMin, math.min(b[2], yMax))
+	local dx, dy = xClosest - b[1], yClosest - b[2]
+	return dx * dx + dy * dy <= b[3] * b[3]
+end
+
 ---Checks overlap of 2 shapes.
 ---@param p Shape
 ---@param q Shape
@@ -194,6 +207,10 @@ local function overlap(p, q)
 		return overlapsRectPoly(p, q)
 	elseif p.kind == Kind.Polygon and q.kind == Kind.Rectangle then
 		return overlapsRectPoly(q, p)
+	elseif p.kind == Kind.Rectangle and q.kind == Kind.Circle then
+		return overlapsRectCircle(p, q)
+	elseif p.kind == Kind.Circle and q.kind == Kind.Rectangle then
+		return overlapsRectCircle(q, p)
 	else
 		return false
 	end

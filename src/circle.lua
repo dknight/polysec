@@ -1,4 +1,4 @@
----@alias Circle [number, number, number]
+---@alias Circle number[]
 
 local Circle = require("src.Kind").Circle
 local mt = require("src.helpers").createMetaTableForKind(Circle)
