@@ -90,7 +90,7 @@ end
 
 function love.load()
 	width = love.graphics.getDimensions()
-	love.window.setTitle("Polysec demo: Polygons ntersection")
+	love.window.setTitle("Polysec demon Polygons intersection")
 end
 
 function love.update(dt)

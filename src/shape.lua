@@ -181,7 +181,7 @@ local function overlapsRectPoly(a, b)
 	return overlapsPolyPoly(poly, b)
 end
 
----Checks overlapping of rectangle and polygon.
+---Checks overlapping of rectangle and circle.
 ---@param a Rectangle
 ---@param b Circle
 ---@return boolean
@@ -192,6 +192,15 @@ local function overlapsRectCircle(a, b)
 	local yClosest = math.max(yMin, math.min(b[2], yMax))
 	local dx, dy = xClosest - b[1], yClosest - b[2]
 	return dx * dx + dy * dy <= b[3] * b[3]
+end
+
+---Checks overlapping of two circles.
+---@param a Circle
+---@param b Circle
+---@return boolean
+local function overlapsCircleCircle(a, b)
+	local dx, dy = b[1] - a[1], b[2] - a[2]
+	return math.sqrt(dx * dx + dy * dy) <= a[3] + b[3]
 end
 
 ---Checks overlap of 2 shapes.
@@ -211,6 +220,8 @@ local function overlap(p, q)
 		return overlapsRectCircle(p, q)
 	elseif p.kind == Kind.Circle and q.kind == Kind.Rectangle then
 		return overlapsRectCircle(q, p)
+	elseif p.kind == Kind.Circle and q.kind == Kind.Circle then
+		return overlapsCircleCircle(q, p)
 	else
 		return false
 	end
