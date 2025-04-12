@@ -6,7 +6,6 @@ return {
 	polygon = require("src.polygon"),
 	rectangle = require("src.rectangle"),
 
-	shape = shape,
 	overlap = shape.overlap,
 	contain = shape.contain,
 

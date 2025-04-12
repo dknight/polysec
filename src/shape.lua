@@ -1,7 +1,7 @@
-local helpers = require("src.helpers")
 local Kind = require("src.Kind")
-local polygon = require("src.polygon")
+local helpers = require("src.helpers")
 local point = require("src.point")
+local polygon = require("src.polygon")
 
 local Epsilon = helpers.Epsilon
 
@@ -202,7 +202,13 @@ local function circleCircle(a, b)
 	return math.sqrt(dx * dx + dy * dy) <= a[3] + b[3]
 end
 
--- TODO annot
+---Checks that line intersect circle.
+---@param x1 number
+---@param y1 number
+---@param x2 number
+---@param y2 number
+---@param r Circle
+---@return boolean
 local function lineCircle(x1, y1, x2, y2, r)
 	local ac = { r[1] - x1, r[2] - y1 }
 	local ab = { x2 - x1, y2 - y1 }
@@ -232,9 +238,11 @@ local function polygonCircle(a, b)
 			return true
 		end
 	end
+	-- Checkt the last segment
 	if lineCircle(a[1][1], a[1][2], a[#a][1], a[#a][2], b) then
 		return true
 	end
+	-- Checks that circle inside polygon
 	return contain(a, { b[1], b[2] })
 end
 
