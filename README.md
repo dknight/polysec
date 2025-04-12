@@ -103,8 +103,9 @@ Use relative paths for demos; this keeps the import path correct.
 
 ```shell
 love ./demos/point-inside
-love ./demos/polygons-intersection
-love ./demos/rectangles-intersection
+love ./demos/polygon-intersection
+love ./demos/rectangle-intersection
+love ./demos/circle-intersection
 ```
 
 ## Tests
