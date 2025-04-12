@@ -1,8 +1,7 @@
 ---@alias Circle [number, number, number]
 
-local shape = require("src.shape")
-local Circle = shape.Kind.Circle
-local mt = shape.createMetaTableForKind(Circle)
+local Circle = require("src.Kind").Circle
+local mt = require("src.helpers").createMetaTableForKind(Circle)
 
 ---Creates a new point.
 ---@param x number

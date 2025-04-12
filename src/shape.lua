@@ -1,26 +1,11 @@
----@enum (number) Kind
-local Kind = {
-	Rectangle = 0,
-	Polygon = 1,
-	Circle = 2,
-}
+local helpers = require("src.helpers")
+local Kind = require("src.Kind")
+local polygon = require("src.polygon")
+local point = require("src.point")
 
----@type number A "very small" number.
-local Epsilon = 1e-9
+local Epsilon = helpers.Epsilon
 
 ---@alias Shape Rectangle | Polygon | Circle | {kind: Kind}
-
----Create a metatable with a "kind" field to distinguish shapes easily
----created with PolySec
----@param kind Kind
----@return table
-local function createMetaTableForKind(kind)
-	return {
-		__index = {
-			kind = kind,
-		},
-	}
-end
 
 ---Checks is the point inside a rectangle.
 ---@param sh Shape
@@ -57,7 +42,7 @@ local function contain(s, p)
 	elseif isCircle(s) then
 		local x = p[1] - s[1]
 		local y = p[2] - s[2]
-		return (x * x + y * y) <= s[3] * s[3]
+		return x * x + y * y <= s[3] * s[3]
 	elseif isPolygon(s) then
 		local windingNumber = 0
 		for i = 1, #s do
@@ -88,8 +73,8 @@ local function contain(s, p)
 	end
 end
 
----Compute the intersection of two line segments {`p1`, `p2`} and
----{`q1`, `q2`}. If segments are parallel or incongruent, it returns `nil`.
+---Compute the intersection of two line segments {p, q} and {s, t}.
+---If segments are parallel or incongruent, it returns `nil`.
 ---@param p1 Point
 ---@param p2 Point
 ---@param q1 Point
@@ -130,7 +115,11 @@ local function intersects(p1, p2, q1, q2)
 	return nil
 end
 
--- TODO comments annotations
+---Checks overlapping of two rectangles.
+---TODO make return intersection rectangle
+---@param a Rectangle
+---@param b Rectangle
+---@return boolean
 local function overlapsRectRect(a, b)
 	return a[1] < b[1] + b[3]
 		and a[1] + a[3] > b[1]
@@ -178,27 +167,43 @@ local function overlapsPolyPoly(a, b)
 	end
 end
 
+---Checks overlapping of rectangle and polygon.
+---@param a Rectangle
+---@param b Polygon
+---@return boolean
+local function overlapsRectPoly(a, b)
+	local poly = polygon.new(
+		point.new(a[1], a[2]),
+		point.new(a[1], a[2] + a[4]),
+		point.new(a[1] + a[3], a[2] + a[4]),
+		point.new(a[1] + a[3], a[2])
+	)
+	return overlapsPolyPoly(poly, b)
+end
+
 ---Checks overlap of 2 shapes.
 ---@param p Shape
 ---@param q Shape
----@return boolean, Shape | nil
+---@return boolean, Shape?
 local function overlap(p, q)
 	if p.kind == Kind.Rectangle and q.kind == Kind.Rectangle then
 		return overlapsRectRect(p, q)
-	end
-	if p.kind == Kind.Polygon and q.kind == Kind.Polygon then
+	elseif p.kind == Kind.Polygon and q.kind == Kind.Polygon then
 		return overlapsPolyPoly(p, q)
+	elseif p.kind == Kind.Rectangle and q.kind == Kind.Polygon then
+		return overlapsRectPoly(p, q)
+	elseif p.kind == Kind.Polygon and q.kind == Kind.Rectangle then
+		return overlapsRectPoly(q, p)
+	else
+		return false
 	end
-	return false
 end
 
 return {
-	contain = contain,
-	createMetaTableForKind = createMetaTableForKind,
 	Kind = Kind,
+	contain = contain,
+	isCircle = isCircle,
 	isPolygon = isPolygon,
 	isRectangle = isRectangle,
-	isCircle = isCircle,
 	overlap = overlap,
-	Epsilon = Epsilon,
 }

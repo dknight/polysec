@@ -1,6 +1,5 @@
-local shape = require("src.shape")
-local Polygon = shape.Kind.Polygon
-local mt = shape.createMetaTableForKind(Polygon)
+local Polygon = require("src.Kind").Polygon
+local mt = require("src.helpers").createMetaTableForKind(Polygon)
 
 ---@alias Polygon Point[]
 
@@ -38,8 +37,6 @@ end
 
 return {
 	add = add,
-	intersects = intersects,
 	new = new,
-	overlaps = overlaps,
 	toList = toList,
 }

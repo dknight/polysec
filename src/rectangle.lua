@@ -1,8 +1,7 @@
----@alias Rectangle [number, number, number, number]
+---@alias Rectangle number[]
 
-local shape = require("src.shape")
-local Rectangle = shape.Kind.Rectangle
-local mt = shape.createMetaTableForKind(Rectangle)
+local Rectangle = require("src.Kind").Rectangle
+local mt = require("src.helpers").createMetaTableForKind(Rectangle)
 
 ---Creates a new rectangle.
 ---@param x number
