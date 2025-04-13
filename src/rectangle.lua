@@ -1,7 +1,9 @@
+---@module 'rectangle'
+
 ---@alias Rectangle number[]
 
 local Rectangle = require("src.Kind").Rectangle
-local mt = require("src.helpers").createMetaTableForKind(Rectangle)
+local mt = require("src.helpers")._createMetaTableForKind(Rectangle)
 
 ---Creates a new rectangle.
 ---@param x number

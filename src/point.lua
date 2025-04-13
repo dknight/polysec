@@ -1,3 +1,5 @@
+---@module 'point'
+
 ---@alias Point [number, number]
 
 ---Creates a new point.

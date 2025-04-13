@@ -1,3 +1,5 @@
+---@module 'overlap'
+
 local contain = require("src.contain")
 local constant = require("src.Constant")
 local polygon = require("src.polygon")
@@ -178,7 +180,7 @@ local function polygonCircle(a, b)
 	return contain(a, { b[1], b[2] })
 end
 
----Checks overlap of 2 shapes.
+---Checks overlapping of twp shapes.
 ---@param p Shape
 ---@param q Shape
 ---@return boolean, Shape?

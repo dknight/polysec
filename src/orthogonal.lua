@@ -1,5 +1,7 @@
 ---@module 'orthogonal'
 
+local rectangle = require("src.rectangle")
+
 ---Checks that point is inside orthogonal rectangle.
 ---@param r Rectangle
 ---@param p Point
@@ -23,6 +25,7 @@ local function overlap(a, b)
 end
 
 return {
+    rectangle = rectangle,
 	contain = contain,
 	overlap = overlap,
 }

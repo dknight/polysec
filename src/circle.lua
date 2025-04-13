@@ -1,9 +1,11 @@
+---@module 'circle'
+
 ---@alias Circle number[]
 
 local Circle = require("src.Kind").Circle
-local mt = require("src.helpers").createMetaTableForKind(Circle)
+local mt = require("src.helpers")._createMetaTableForKind(Circle)
 
----Creates a new point.
+---Creates a new circle.
 ---@param x number
 ---@param y number
 ---@param r number

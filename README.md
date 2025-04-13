@@ -146,8 +146,10 @@ make lint test
 ### Types
 
 - `Point [number, number]`
-- `Rectangle [number, number, number, number]`
-- `Polygon Point[]`
+- `Rectangle number[]`
+- `Polygon number[]`
+- `Circle number[]`
+- `Shape Rectangle | Polygon | Circle | {kind: Kind}`
 
 ### Modules
 
@@ -157,16 +159,14 @@ make lint test
   Creates a new point instance with x and y coordinates.
 - `distanceTo(p: Point, q: Point): number`<br>
   Computes the distance between two points.
+- `areEqual(p: Point, q: Point): number`<br>
+  Checks that two points have same coordinates.
 
 #### `rectangle`
 
 - `new(x1: number, y1: number, x2; number, y2: number): Rectangle`<br>
 - `new(p: Point, q: Point): Rectangle`<br>
   Creates a new rectangle instance.
-- `contains(rect: Rectangle, point: Point): boolean`<br>
-  Checks is the point inside a rectangle.
-- `overlaps(rect1: Rectangle, rect2: Rectangle): boolean`<br>
-  Checks two axis-aligned rectangles for the collision.
 - `toList(rect: Rectangle): number`<br>
   Converts the rectangle to the array of numbers.
 
@@ -178,17 +178,56 @@ make lint test
   Adds point(s) to the polygon.
 - `toList(): number[]`<br>
   Converts polygon to the form of array \[x1, y1, x2, y2, y3, y3, ..., xN, yN\].
-- `contains(a: Polygon, p: Point): boolean`<br>
-  Check if a point is inside a polygon `a` using the winding number method. Point is inside if the winding number is nonzero.
-- `intersects(p1: Point, p2: Point, q1: Point, q2: Point): Point|nil`<br>
-  Compute the intersection of two line segments {`p1`, `p2`} and {`q1`, `q2`}. If segments are parallel or incongruent, it returns `nil`.
-- `overlaps(a: Polygon, b: Polygon): Polygon|nil, boolean`<br>
-  Checks that two polygons are overlapping each other. If polygons do not overlap `nil` and `false`, they are returned; otherwise, clipped polygons and `true` are returned.
 
-#### `constant`
+#### `circle`
+
+- `new(x: number, y: number, r: number): Circle`<br>
+- `new(p: Point, r: number): Circle`<br>
+  Creates a new circle instance.
+- `toList(circle: Circle): number`<br>
+  Converts the circle to the array of numbers.
+
+#### `contian`
+
+- `contain(s: Shape, p: Point): boolean`<br>
+  Checks is the point inside a shape.
+  For polygon using the winding number method.
+
+#### `overlap`
+
+- `overlap(s: Shape, t: Shape): boolean, Shape?`<br>
+  Checks overlapping of two shapes.
+
+#### `helpers`
+
+- `closeTo(a: number, b: number): boolean`<br>
+  Helper function for float equality comparison.
+- `isCircle(s: Shape): boolean`<br>
+  Checks that shape is a circle.
+- `isPolygon(s: Shape): boolean`<br>
+  Checks that shape is a polygon.
+- `isRectangle(s: Shape): boolean`<br>
+  Checks that shape is a rectangle.
+
+#### `orthogonal`
+
+- `rectangle: Rectamgle`<br>
+  Same as [`rectangle`](#rectangle)
+- `overlap(s: Rectangle t: Rectangle): boolean`<br>
+  Checks overlapping of two orthogonal rectangles.
+- `contain(r: Rectangle, p: Point): boolean`<br>
+  Checks that point is inside orthogonal rectangle.
+
+#### enum `Constant`
 
 - `Epslion: number`<br>
-  A very small number.
+  A very small number, value is `1e-9`.
+
+#### enum `Kind`
+
+- `Rectangle = 0`
+- `Polygon = 1`
+- `Circle = 2`
 
 ## Contribution
 

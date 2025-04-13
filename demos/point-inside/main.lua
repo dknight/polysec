@@ -11,7 +11,7 @@ local width, height, poly, circl, rect, p
 function love.load()
 	width, height = love.graphics.getDimensions()
 	p = point.new(width / 2 + r / 2, height / 2 + r / 2)
-	rect = rectangle.new(100, height / 2 - 100, 200, 200)
+	rect = rectangle.new(100, 100, 200, 200)
 	local dh = height / 2 - 50
 	poly = polygon.new(
 		point.new(630, dh - 75),

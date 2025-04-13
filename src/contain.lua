@@ -1,3 +1,5 @@
+---@module 'contain'
+
 local helpers = require("src.helpers")
 local isRectangle = helpers.isRectangle
 local isCircle = helpers.isCircle

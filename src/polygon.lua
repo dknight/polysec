@@ -1,5 +1,7 @@
+---@module 'polygon'
+
 local Polygon = require("src.Kind").Polygon
-local mt = require("src.helpers").createMetaTableForKind(Polygon)
+local mt = require("src.helpers")._createMetaTableForKind(Polygon)
 
 ---@alias Polygon Point[]
 
