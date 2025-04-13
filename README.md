@@ -5,6 +5,7 @@
 </p>
 
 <p align="center">
+<a href="https://github.com/dknight/polysec/releases"><img alt="GitHub Release" src="https://img.shields.io/github/v/release/dknight/polysec"></a>
 <a href="https://github.com/dknight/polysec/actions/workflows/test.yml"><img src="https://github.com/dknight/polysec/actions/workflows/test.yml/badge.svg" alt="Tests"></a>
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
 </p>
