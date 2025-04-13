@@ -14,8 +14,7 @@
 ## Features
 
 - Detect point belongs to polygon, circle or rectangle.
-- Detect collision of rectangles.
-- Detect collision of polygons.
+- Detect collision of rectangles, circles and polygons.
 - Measure distance between two points.
 - Checks that two point are equal (have same coordinates).
 
